@@ -32,8 +32,8 @@ def htmlify_code(code):
     # TODO: replace < and > within the code
     # maintain whitespaces
     print code
-    code = '<br/>\r\n'.join(htmlify_line(line) for line in code.split('\r\n'))
+    code = '\n'.join(htmlify_line(line) for line in code.split('\r\n'))
 
     # html tags
-    code = "<pre><code>\r\n{}\r\n</code></pre>".format(code)
+    code = "<pre><code>{}</code></pre>".format(code)
     return code

@@ -16,6 +16,15 @@
       <script src="js/html5shiv.js"></script>
     <![endif]-->
     <script type="text/javascript" src="{{ STATIC_URL }}js/ZeroClipboard.min.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+        ga('create', 'UA-30855914-2', 'htmlify.net');
+        ga('send', 'pageview');
+    </script>
 </head>
 <body>
 
@@ -57,7 +66,8 @@
                     {% endif %}
                 </div>
                 <div align="center" style="width: 50%;">
-                    <div class="btn btn-large btn-block" style="width: 100%;" id="copy-button" data-clipboard-target="formatted-code">Copy to Clipboard</div>
+                    <div class="btn btn-large btn-block" 
+                        {% if not htmlified %} disabled {% endif %} style="width: 100%;" id="copy-button" data-clipboard-target="formatted-code">Copy to Clipboard</div>
                 </div>
             </div>
         </div>
@@ -85,11 +95,6 @@
 <script type="text/javascript">
     var clip = new ZeroClipboard(document.getElementById("copy-button"), {
           moviePath: "{{ STATIC_URL }}swf/ZeroClipboard.swf"
-        } );
-    
-        clip.on( 'complete', function(client, args) {
-          this.style.display = 'none'; // "this" is the element that was clicked
-          alert("Copied text to clipboard: " + args.text );
         } );
 </script>
 
