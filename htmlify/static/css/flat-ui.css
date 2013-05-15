@@ -2529,3 +2529,19 @@ body.vjs-full-window {
 
 .mll, .mhl, .mal {
   margin-left: 20px; }
+
+#copy-button.zeroclipboard-is-hover {
+    background-color: #4e6d8d;
+    color: white;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden; }
+
+#copy-button.zeroclipboard-is-active {
+    background-color: #2c3e50;
+    color: rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none; }

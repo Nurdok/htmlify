@@ -13,8 +13,10 @@ def htmlify(request):
     elif request.method == 'POST':
         form = HtmlifyForm(request.POST)  # A form bound to the POST data
         if form.is_valid():  # All validation rules pass
-            html_code = htmlify_code(form.cleaned_data['code'])
-            context.update({'htmlified': html_code})
+            original_code = form.cleaned_data['code']
+            html_code = htmlify_code(original_code)
+            context.update({'htmlified': html_code,
+                            'to_htmlify': original_code})
     context.update({'form': form})
     return render_to_response('htmlify.html', context)
 
