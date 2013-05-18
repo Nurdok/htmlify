@@ -35,6 +35,25 @@
                 });
                 
             })
+            
+            $(document).delegate('#input-textarea', 'keydown', function(e) {
+            	  var keyCode = e.keyCode || e.which;
+
+            	  if (keyCode == 9) {
+            	    e.preventDefault();
+            	    var start = $(this).get(0).selectionStart;
+            	    var end = $(this).get(0).selectionEnd;
+
+            	    // set textarea value to: text before caret + tab + text after caret
+            	    $(this).val($(this).val().substring(0, start)
+            	                + "    "
+            	                + $(this).val().substring(end));
+
+            	    // put caret at right position again
+            	    $(this).get(0).selectionStart =
+            	    $(this).get(0).selectionEnd = start + 4;
+            	  }
+            	});
         })
     </script>
 
@@ -73,7 +92,7 @@
                 <div align="center">
                     <form action="/" method="post" id="htmlify-form">{% csrf_token %}
                         <div align="center" style="width: 100%;">
-                            <textarea placeholder="Paste your code here!" class="span3" rows=5 style="width: 100%; resize: none" name="{{ form.code.html_name }}">{{ to_htmlify }}</textarea>
+                            <textarea placeholder="Paste your code here!" class="span3" rows=5 style="width: 100%; resize: none" name="{{ form.code.html_name }}" id="input-textarea">{{ to_htmlify }}</textarea>
                         </div>
                         <div align="center" style="width: 50%;">
                               <input type="submit" value="HTMLify!" class="btn btn-large btn-block" style="width: 100%;" onsubmit="htmlifysubmit()" />
