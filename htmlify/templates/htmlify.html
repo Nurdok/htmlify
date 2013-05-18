@@ -29,6 +29,7 @@
                     data: $(this).serialize(),
                     success: function(response) {
                         $('#formatted-code').val(response)
+                        $('#copy-button').removeAttr('disabled')
                     }
                 });
                 
@@ -81,11 +82,7 @@
                 </div>
                 &nbsp;
                 <div align="center" style="width: 100%; background-color: #f1f1f1">
-                    {% if htmlified %}
-                    <textarea disabled style="width: 100%; resize: none; border-color: rgba(0, 0, 0, 0.12); color: rgb(119, 127, 128)" rows=5 id="formatted-code">{{ htmlified }}</textarea>
-                    {% else %}
-                    <textarea disabled rows=5 placeholder="Your HTML will appear here after you click HTMLify." style="width: 100%; resize: none; border-color: rgba(0, 0, 0, 0.12)" id="formatted-code"></textarea>
-                    {% endif %}
+                    <textarea disabled placeholder="Your HTML will appear here after you click HTMLify." style="width: 100%; resize: none; border-color: rgba(0, 0, 0, 0.12); color: rgb(119, 127, 128)" rows=5 id="formatted-code">{{ htmlified }}</textarea>
                 </div>
                 <div align="center" style="width: 50%;">
                     <div class="btn btn-large btn-block" {% if not htmlified %} disabled {% endif %} style="width: 100%;" id="copy-button" data-clipboard-target="formatted-code">Copy to Clipboard</div>

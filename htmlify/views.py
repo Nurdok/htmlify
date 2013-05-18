@@ -46,9 +46,11 @@ def htmlify_line(line):
 
 
 def htmlify_code(code):
-    # TODO: replace < and > within the code
+    code = code.replace('&', '&amp;')
+    code = code.replace('<', '&lt;')
+    code = code.replace('>', '&gt;')
+
     # maintain whitespaces
-    print code
     code = '\n'.join(htmlify_line(line) for line in code.split('\r\n'))
 
     # html tags
