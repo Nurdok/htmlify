@@ -30,6 +30,7 @@
                     success: function(response) {
                         $('#formatted-code').val(response)
                         $('#copy-button').removeAttr('disabled')
+                        $('#preview').html(response)
                     }
                 });
                 
@@ -86,6 +87,11 @@
                 </div>
                 <div align="center" style="width: 50%;">
                     <div class="btn btn-large btn-block" {% if not htmlified %} disabled {% endif %} style="width: 100%;" id="copy-button" data-clipboard-target="formatted-code">Copy to Clipboard</div>
+                </div>
+                &nbsp;
+                <div align="center" style="width:100%; text-align: left" id="preview">
+                
+                    {{ htmlified }}
                 </div>
             </div>
         </div>
