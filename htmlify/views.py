@@ -5,7 +5,6 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from htmlify.forms import HtmlifyForm
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 
 
 def htmlify(request):
@@ -23,7 +22,6 @@ def htmlify(request):
     return render_to_response('htmlify.html', context)
 
 
-@csrf_exempt
 def htmlify_ajax(request):
     if request == 'POST' or request.is_ajax():
         form = HtmlifyForm(request.POST)  # A form bound to the POST data
