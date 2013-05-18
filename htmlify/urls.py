@@ -6,7 +6,8 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'htmlify.views.htmlify', name='htmlify')
+    url(r'^$', 'htmlify.views.htmlify', name='htmlify'),
+    url(r'^htmlify_ajax', 'htmlify.views.htmlify_ajax', name='htmlify_ajax')
     # url(r'^htmlify/', include('htmlify.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
