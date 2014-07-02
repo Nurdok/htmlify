@@ -94,6 +94,10 @@
                         <div align="center" style="width: 100%;">
                             <textarea placeholder="Paste your code here!" class="span3" rows=5 style="width: 100%; resize: none" name="{{ form.code.html_name }}" id="input-textarea">{{ to_htmlify }}</textarea>
                         </div>
+                        <div align="center" style="width: 100%;">
+                            <label for="encoding">Select encoding:</label>
+                            {{form.encoding}}
+                        </div>
                         <div align="center" style="width: 50%;">
                               <input type="submit" value="HTMLify!" class="btn btn-large btn-block" style="width: 100%;" onsubmit="htmlifysubmit()" />
                         </div>
