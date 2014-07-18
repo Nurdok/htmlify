@@ -135,12 +135,22 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
+        },
     },
     'loggers': {
         'django.request': {
@@ -148,6 +158,10 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+         'htmlify.logger': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO'
+        }
     }
 }
 

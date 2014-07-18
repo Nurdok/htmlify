@@ -1,11 +1,12 @@
 """Views."""
 import re
-
+import logging    
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from htmlify.forms import HtmlifyForm
 from django.http import HttpResponse
 
+log = logging.getLogger("htmlify.logger")
 
 def htmlify(request):
     context = RequestContext(request)
@@ -15,7 +16,8 @@ def htmlify(request):
         form = HtmlifyForm(request.POST)  # A form bound to the POST data
         if form.is_valid():  # All validation rules pass
             original_code = form.cleaned_data['code']
-            html_code = htmlify_code(original_code)
+            encoding = form.cleaned_data['encoding']
+            html_code = htmlify_code(original_code, encoding)
             context.update({'htmlified': html_code,
                             'to_htmlify': original_code})
     context.update({'form': form})
@@ -27,7 +29,8 @@ def htmlify_ajax(request):
         form = HtmlifyForm(request.POST)  # A form bound to the POST data
         if form.is_valid():  # All validation rules pass
             original_code = form.cleaned_data['code']
-            html_code = htmlify_code(original_code)
+            encoding = form.cleaned_data['encoding']
+            html_code = htmlify_code(original_code, encoding)
         else:
             return HttpResponse('Something went wrong...')
         return HttpResponse(html_code)
@@ -43,7 +46,7 @@ def htmlify_line(line):
     return line
 
 
-def htmlify_code(code):
+def htmlify_code(code, encoding):
     code = code.replace('&', '&amp;')
     code = code.replace('<', '&lt;')
     code = code.replace('>', '&gt;')
@@ -52,5 +55,9 @@ def htmlify_code(code):
     code = '\n'.join(htmlify_line(line) for line in code.split('\r\n'))
 
     # html tags
-    code = "<pre><code>{}</code></pre>".format(code)
+    try:
+        code = "<pre><code>{}</code></pre>".format(code.encode(encoding))
+    except UnicodeEncodeError:
+        code = "Something went wrong, check the encoding!"
+    
     return code
