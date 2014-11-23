@@ -2,6 +2,8 @@
 
 HTMLify is a mini side project I worked on mainly to get a feel of being a full-stack web developer and creating something from nothing. I created it because, for use in my blog, I used to "convert" code snippets to HTML-compatible format by hand or by a vi script and it's quite annoying.
 
+Check it out online at http://www.htmlify.net/
+
 ## Installation and running
 
 Once you clone the app, you must install the dependencies before running 
